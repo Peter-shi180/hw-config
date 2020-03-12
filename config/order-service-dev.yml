@@ -1,0 +1,45 @@
+spring:
+  application:
+    name: order-service
+  cloud:
+    config:
+      override-none: true
+    
+server:  port: 8201
+  
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka1:2001/eureka,http://eureka2:2002/eureka
+
+#Actuator 监控段点暴露
+management:  endpoints:    web:      exposure:        include:        - hystrix.stream     
+        
+#Ribbon重试配置
+ribbon:
+  MaxAutoRetries: 1
+  MaxAutoRetriesNextServer: 1
+  ConnectTimeout: 1000
+  ReadTimeout: 1000
+
+#开启hystrix功能
+feign:
+  hystrix:
+    enabled: true  
+    
+#可对单个服务器进行重试操作
+#item-service:
+#  ribbon:
+#    MaxAutoRetries: 0
+#    MaxAutoRetriesNextServer: 1
+#    ConnectTimeout: 1000
+#    ReadTimeout: 500
+
+#一般降级超时的时间要大于重试时间    
+#hystrix:
+#  command:
+#    default:
+#      execution:
+#        isolation:
+#          thread:
+#            timeoutInMilliseconds: 5000

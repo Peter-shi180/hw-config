@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: item-service
+  cloud:
+    config:
+      override-none: true
+    
+server:  port: 8001
+  
+eureka:  client:    service-url:      defaultZone: http://eureka1:2001/eureka,http://eureka2:2002/eureka
+      
+#Actuator 监控段点暴露
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+        - hystrix.stream      
+        
+#开启hystrix降级熔断功能
+feign:
+  hystrix:
+    enabled: true        
