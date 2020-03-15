@@ -42,4 +42,4 @@ management:
       exposure:
         include:
         - hystrix.stream
-    
+        - refresh
