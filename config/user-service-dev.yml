@@ -23,6 +23,7 @@ management:
       exposure:
         include:
         - hystrix.stream
+        - refresh
         
 #开启hystrix降级熔断功能
 feign:
